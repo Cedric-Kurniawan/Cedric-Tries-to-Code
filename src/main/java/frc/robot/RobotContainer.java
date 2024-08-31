@@ -10,6 +10,8 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.NavXIO;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.drive.DriveSubsystem;
@@ -55,7 +57,9 @@ public class RobotContainer
   private static double scaler = 1.0; // Scales the velocity of the robot
 
   //Auto chooser
-  private final LoggedDashboardChooser<Command> autoChooser;
+  //private final LoggedDashboardChooser<Command> autoChooser;
+  private final SendableChooser<Command> autoChooser;
+  
   private final LoggedDashboardChooser<Command> feedForwardChooser;
 
   // Controllers
@@ -106,7 +110,9 @@ public class RobotContainer
     NamedCommands.registerCommand("Intake", new AutoIntake());
     
     //Auto chooser
-    autoChooser = new LoggedDashboardChooser<>("Auto Chooser", AutoBuilder.buildAutoChooser()); // Default auto will be Commands.none()
+    //autoChooser = new LoggedDashboardChooser<>("Auto Chooser", AutoBuilder.buildAutoChooser()); // Default auto will be Commands.none()
+    autoChooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData("AutoChooser", autoChooser);
     feedForwardChooser = new LoggedDashboardChooser<>("System ID Routine Chooser");
 
     //System Identification setup
@@ -209,7 +215,8 @@ public class RobotContainer
    */
   public Command getAutonomousCommand() {
     m_robotDrive.zeroHeading();
-    return autoChooser.get();
+    //return autoChooser.get();
+    return autoChooser.getSelected();
   }
 
   public static void getTeleopCommand() {

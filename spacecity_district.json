@@ -34,7 +34,7 @@
             ],
             "content": {
               "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto Chooser",
+              "_source0": "network_table:///SmartDashboard/AutoChooser",
               "_title": "Auto Chooser",
               "_glyph": 148,
               "_showGlyph": false
